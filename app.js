@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var indexRouter = require('./controllers/index');
+var usersRouter = require('./controllers/users');
+//reference to new controller
+const places = require('./controllers/places')
 
 var app = express();
 
@@ -35,6 +37,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+//map any request
+app.use('/places', places)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
